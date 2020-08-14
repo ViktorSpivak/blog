@@ -1,6 +1,6 @@
-import { Post, Comment } from './../../blog/models/blog-entry.interface';
+import { Post, Comment } from '../../blog/models/entry.interface';
 
-export enum RoleEnum {
+export enum UserRole {
   author = 'Author',
   admin = 'Admin',
 }
@@ -9,7 +9,7 @@ export interface User {
   name: string;
   email: string;
   password: string;
-  role: RoleEnum;
+  role: UserRole;
   posts: Post[];
   comments: Comment[];
 }

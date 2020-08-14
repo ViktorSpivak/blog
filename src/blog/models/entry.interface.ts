@@ -1,4 +1,4 @@
-import { User } from './../../user/models/user.entyty';
+import { User } from 'src/user/models/user.interface';
 
 export interface Post {
   id: string;

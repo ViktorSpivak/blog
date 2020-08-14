@@ -5,6 +5,9 @@ export class UserService {
   getUser(): string {
     return 'getUser!';
   }
+  getUsers(): string {
+    return 'getUsers!';
+  }
   updateUser(): string {
     return 'updateUser!';
   }

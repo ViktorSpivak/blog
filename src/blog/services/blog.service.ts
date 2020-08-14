@@ -1,7 +1,19 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AuthorService {
+export class BlogService {
+  getComments(): string {
+    return 'getComments!';
+  }
+  createComments(): string {
+    return 'createComments!';
+  }
+  updateComments(): string {
+    return 'updateComments!';
+  }
+  deleteComments(): string {
+    return 'delComments!';
+  }
   getPosts(): string {
     return 'getPosts!';
   }
