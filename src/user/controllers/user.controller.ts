@@ -1,5 +1,7 @@
+import { UserRole } from 'src/user/models/user.interface';
+import { Roles } from 'src/auth/roles.decorator';
 import { CreateUser } from 'src/user/models/user.interface';
-import { UserEntity } from './../models/user.entity';
+import { UserEntity } from 'src/user/models/user.entity';
 import {
   Controller,
   Post,
@@ -12,6 +14,7 @@ import {
 import { UserService } from '../services/user.service';
 
 @Controller('user')
+@Roles(UserRole.admin)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
