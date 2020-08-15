@@ -13,3 +13,13 @@ export interface User {
   posts: Post[];
   comments: Comment[];
 }
+
+export interface CreateUser {
+  email: string;
+  name: string;
+  password: string;
+}
+// export interface LoginUser {
+//   name: string;
+//   password: string;
+// }

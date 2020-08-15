@@ -28,6 +28,9 @@ export class UserEntity {
   @Column({ type: 'enum', enum: UserRole, default: UserRole.author })
   role!: UserRole;
 
+  @Column({ default: null })
+  token!: string;
+
   @ManyToOne(
     type => PostEntity,
     post => post.id,

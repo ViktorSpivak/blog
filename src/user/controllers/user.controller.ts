@@ -1,3 +1,4 @@
+import { CreateUser } from 'src/user/models/user.interface';
 import { UserEntity } from './../models/user.entity';
 import {
   Controller,
@@ -25,7 +26,7 @@ export class UserController {
   }
 
   @Post()
-  async createUser(@Body() user: UserEntity): Promise<UserEntity> {
+  async createUser(@Body() user: CreateUser): Promise<UserEntity> {
     return this.userService.createUser(user);
   }
 

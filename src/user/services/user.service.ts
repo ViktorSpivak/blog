@@ -1,3 +1,4 @@
+import { CreateUser } from 'src/user/models/user.interface';
 import { UserEntity } from './../models/user.entity';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,8 +24,19 @@ export class UserService {
       HttpStatus.NOT_FOUND,
     );
   }
+  async getUserByName(name: string): Promise<UserEntity> {
+    const user = await this.usersRepository.findOne({ name });
 
-  async createUser(user: UserEntity): Promise<UserEntity> {
+    if (user) {
+      return user;
+    }
+    throw new HttpException(
+      'User with this name does not exist',
+      HttpStatus.NOT_FOUND,
+    );
+  }
+
+  async createUser(user: CreateUser): Promise<UserEntity> {
     const newUser = this.usersRepository.create(user);
     await this.usersRepository.save(newUser);
     return newUser;
@@ -37,22 +49,3 @@ export class UserService {
   //   return updateUser;
   // }
 }
-
-// @Injectable()
-// export class UserService {
-//   getUser(): string {
-//     return 'getUser!';
-//   }
-//   getUsers(): string {
-//     return 'getUsers!';
-//   }
-//   updateUser(): string {
-//     return 'updateUser!';
-//   }
-//   createUser(): string {
-//     return 'createUser!';
-//   }
-//   delUser(): string {
-//     return 'delUser!';
-//   }
-// }
