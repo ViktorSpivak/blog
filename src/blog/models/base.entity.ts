@@ -15,7 +15,7 @@ export abstract class BaseEntity {
 
   @ManyToOne(
     type => UserEntity,
-    userEntity => userEntity.id,
+    user => user.id,
   )
   author!: UserEntity;
 

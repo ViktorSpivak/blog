@@ -6,7 +6,7 @@ import { Entity, ManyToOne } from 'typeorm';
 export class CommentEntity extends BaseEntity {
   @ManyToOne(
     type => PostEntity,
-    postEntity => postEntity.comments,
+    post => post.id,
   )
   post!: PostEntity;
 }

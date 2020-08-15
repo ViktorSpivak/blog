@@ -1,30 +1,68 @@
-import { Controller, Post, Delete, Get } from '@nestjs/common';
+import { UserEntity } from './../models/user.entity';
+import {
+  Controller,
+  Post,
+  Delete,
+  Get,
+  Put,
+  Body,
+  Param,
+} from '@nestjs/common';
 import { UserService } from '../services/user.service';
 
-@Controller()
+@Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get(':id')
-  getUser(): string {
-    return this.userService.getUser();
-  }
   @Get()
-  getUsers(): string {
-    return this.userService.getUsers();
-  }
-  @Post(':id')
-  updateUser(): string {
-    return this.userService.updateUser();
+  getAllUsers(): Promise<UserEntity[]> {
+    return this.userService.getAllUsers();
   }
 
-  @Post(':id')
-  createUser(): string {
-    return this.userService.createUser();
+  @Get(':id')
+  getUserById(@Param('id') id: string): Promise<UserEntity> {
+    return this.userService.getUserById(id);
   }
+
+  @Post()
+  async createUser(@Body() user: UserEntity): Promise<UserEntity> {
+    return this.userService.createUser(user);
+  }
+
+  // @Put(':id')
+  // async updateUser(@Param('id') id: string, @Body() user: UserEntity) {
+  //   return this.userService.updateUser(Number(id), user);
+  // }
 
   @Delete(':id')
-  delUser(): string {
-    return this.userService.delUser();
+  async deleteUser(@Param('id') id: string): Promise<void> {
+    this.userService.deleteUser(id);
   }
 }
+// @Controller()
+// export class UserController {
+//   constructor(private readonly userService: UserService) {}
+
+//   @Get(':id')
+//   getUser(): string {
+//     return this.userService.getUser();
+//   }
+//   @Get()
+//   getUsers(): string {
+//     return this.userService.getUsers();
+//   }
+//   @Post(':id')
+//   updateUser(): string {
+//     return this.userService.updateUser();
+//   }
+
+//   @Post(':id')
+//   createUser(): string {
+//     return this.userService.createUser();
+//   }
+
+//   @Delete(':id')
+//   delUser(): string {
+//     return this.userService.delUser();
+//   }
+// }

@@ -1,4 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
+import { CommentEntity } from 'src/blog/models/comment.entity';
+import { PostEntity } from 'src/blog/models/post.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BeforeInsert,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { UserRole } from './user.interface';
 
@@ -11,9 +20,6 @@ export class UserEntity {
   name!: string;
 
   @Column()
-  username!: string;
-
-  @Column({ unique: true })
   email!: string;
 
   @Column()
@@ -21,6 +27,18 @@ export class UserEntity {
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.author })
   role!: UserRole;
+
+  @ManyToOne(
+    type => PostEntity,
+    post => post.id,
+  )
+  posts!: PostEntity[];
+
+  @OneToMany(
+    type => CommentEntity,
+    comment => comment.id,
+  )
+  comments!: PostEntity[];
 
   @BeforeInsert()
   emailToLowerCase(): void {

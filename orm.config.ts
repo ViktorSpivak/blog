@@ -3,14 +3,17 @@ import { CommentEntity } from './src/blog/models/comment.entity';
 import { UserEntity } from './src/user/models/user.entity';
 
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+require('dotenv/config');
+
+const { DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST } = process.env;
 
 export const config: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: 'ec2-52-31-94-195.eu-west-1.compute.amazonaws.com',
+  host: DB_HOST,
   port: 5432,
-  username: 'weswarefozsnyi',
-  password: 'b4de1a917f49b601cbb037a140f44be6cf7909608625966177dd5774bdb485c3',
-  database: 'd1n4rv1h5aa9pl',
+  username: DB_USERNAME,
+  password: DB_PASSWORD,
+  database: DB_DATABASE,
   entities: [UserEntity, CommentEntity, PostEntity],
   synchronize: true,
   ssl: {
